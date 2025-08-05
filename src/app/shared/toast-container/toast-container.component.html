@@ -1,0 +1,8 @@
+<app-toast
+  *ngFor="let toast of toasts; trackBy: trackByToast"
+  [message]="toast.message"
+  [type]="toast.type"
+  [duration]="toast.duration"
+  (close)="removeToast(toast.id)"
+>
+</app-toast>

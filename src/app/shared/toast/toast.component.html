@@ -1,0 +1,105 @@
+<!-- Toast Container -->
+<div
+  class="toast-container font-vietnam"
+  [ngClass]="'toast-' + type"
+  [@slideInOut]
+>
+  <!-- Background Glow Effect -->
+  <div class="toast-glow"></div>
+
+  <!-- Main Toast Content -->
+  <div class="toast-wrapper">
+    <!-- Status Icon -->
+    <div class="toast-icon-wrapper">
+      <div class="toast-icon" [ngClass]="'icon-' + type">
+        <!-- Error Icon -->
+
+        <svg
+          width="800px"
+          class="h-full w-full text-red-500"
+          height="800px"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2.20164 18.4695L10.1643 4.00506C10.9021 2.66498 13.0979 2.66498 13.8357 4.00506L21.7984 18.4695C22.4443 19.6428 21.4598 21 19.9627 21H4.0373C2.54022 21 1.55571 19.6428 2.20164 18.4695Z"
+            stroke="#000000"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            fill="red"
+          />
+          <path
+            d="M12 9V13"
+            stroke="#000000"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M12 17.0195V17"
+            stroke="#000000"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+
+        <!-- Success Icon -->
+        <svg *ngIf="type === 'success'" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+          />
+        </svg>
+
+        <!-- Warning Icon -->
+        <svg *ngIf="type === 'warning'" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
+        </svg>
+
+        <!-- Info Icon -->
+        <svg *ngIf="type === 'info'" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Content Area -->
+    <div class="toast-content">
+      <div class="toast-title">
+        <span [ngSwitch]="type">
+          <span *ngSwitchCase="'error'">System Alert</span>
+          <span *ngSwitchCase="'success'">Task Complete</span>
+          <span *ngSwitchCase="'warning'">Attention Required</span>
+          <span *ngSwitchCase="'info'">Information</span>
+        </span>
+      </div>
+      <div class="toast-message">{{ message }}</div>
+    </div>
+
+    <!-- Close Button -->
+    <button
+      class="toast-close"
+      (click)="closeToast()"
+      aria-label="Close notification"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="toast-progress-track">
+    <div
+      class="toast-progress-bar"
+      [style.animation-duration]="duration + 'ms'"
+      [ngClass]="'progress-' + type"
+    ></div>
+  </div>
+</div>

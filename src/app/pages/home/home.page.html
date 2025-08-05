@@ -1,0 +1,634 @@
+<ion-content>
+  <div class="min-h-screen bg-gray-50 py-4 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <div class="flex justify-center mb-4">
+          <div class="bg-blue-600 p-3 rounded-full">
+            <ion-icon name="sim-outline" class="text-white text-2xl"></ion-icon>
+          </div>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">SIM Registration</h1>
+        <p class="text-gray-600">
+          Please fill in your details to register your SIM card
+        </p>
+      </div>
+
+      <!-- Registration Form -->
+      <div class="bg-white shadow-lg rounded-lg p-6 sm:p-8">
+        <form
+          [formGroup]="registrationForm"
+          (ngSubmit)="onSubmit()"
+          class="space-y-6"
+        >
+          <!-- Personal Information Section -->
+          <div class="border-b border-gray-200 pb-6">
+            <h2
+              class="text-lg font-semibold text-gray-900 mb-4 flex items-center"
+            >
+              <ion-icon
+                name="person-outline"
+                class="mr-2 text-blue-600"
+              ></ion-icon>
+              Personal Information
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- First Name -->
+              <div>
+                <label
+                  for="firstName"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  First Name *
+                </label>
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="firstName"
+                    formControlName="firstName"
+                    class="w-full px-3 py-2 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    [class.border-red-500]="isFieldInvalid('firstName')"
+                    [class.border-gray-300]="!isFieldInvalid('firstName')"
+                    placeholder="Enter your first name"
+                  />
+                  <ion-icon
+                    name="person-outline"
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                </div>
+                <p
+                  *ngIf="isFieldInvalid('firstName')"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ getFieldError('firstName') }}
+                </p>
+              </div>
+
+              <!-- Last Name -->
+              <div>
+                <label
+                  for="lastName"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Last Name *
+                </label>
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="lastName"
+                    formControlName="lastName"
+                    class="w-full px-3 py-2 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    [class.border-red-500]="isFieldInvalid('lastName')"
+                    [class.border-gray-300]="!isFieldInvalid('lastName')"
+                    placeholder="Enter your last name"
+                  />
+                  <ion-icon
+                    name="person-outline"
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                </div>
+                <p
+                  *ngIf="isFieldInvalid('lastName')"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ getFieldError('lastName') }}
+                </p>
+              </div>
+
+              <!-- Birth Date -->
+              <div>
+                <label
+                  for="birthDate"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Birth Date *
+                </label>
+                <div class="relative">
+                  <input
+                    type="date"
+                    id="birthDate"
+                    formControlName="birthDate"
+                    class="w-full px-3 py-2 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    [class.border-red-500]="isFieldInvalid('birthDate')"
+                    [class.border-gray-300]="!isFieldInvalid('birthDate')"
+                  />
+                  <ion-icon
+                    name="calendar-outline"
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                </div>
+                <p
+                  *ngIf="isFieldInvalid('birthDate')"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ getFieldError('birthDate') }}
+                </p>
+              </div>
+
+              <!-- Gender -->
+              <div>
+                <label
+                  for="gender"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Gender *
+                </label>
+                <div class="relative">
+                  <select
+                    id="gender"
+                    formControlName="gender"
+                    class="w-full px-3 py-2 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
+                    [class.border-red-500]="isFieldInvalid('gender')"
+                    [class.border-gray-300]="!isFieldInvalid('gender')"
+                  >
+                    <option value="">Select gender</option>
+                    <option
+                      *ngFor="let option of genderOptions"
+                      [value]="option.value"
+                    >
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <ion-icon
+                    name="people-outline"
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                  <ion-icon
+                    name="chevron-down-outline"
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                </div>
+                <p
+                  *ngIf="isFieldInvalid('gender')"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ getFieldError('gender') }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Information Section -->
+          <div class="border-b border-gray-200 pb-6">
+            <h2
+              class="text-lg font-semibold text-gray-900 mb-4 flex items-center"
+            >
+              <ion-icon
+                name="call-outline"
+                class="mr-2 text-blue-600"
+              ></ion-icon>
+              Contact Information
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Phone Number -->
+              <div>
+                <label
+                  for="phoneNumber"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Phone Number *
+                </label>
+                <div class="relative">
+                  <input
+                    type="tel"
+                    id="phoneNumber"
+                    formControlName="phoneNumber"
+                    class="w-full px-3 py-2 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    [class.border-red-500]="isFieldInvalid('phoneNumber')"
+                    [class.border-gray-300]="!isFieldInvalid('phoneNumber')"
+                    placeholder="+65 9123 4567"
+                  />
+                  <ion-icon
+                    name="call-outline"
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                </div>
+                <p
+                  *ngIf="isFieldInvalid('phoneNumber')"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ getFieldError('phoneNumber') }}
+                </p>
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label
+                  for="email"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Email Address *
+                </label>
+                <div class="relative">
+                  <input
+                    type="email"
+                    id="email"
+                    formControlName="email"
+                    class="w-full px-3 py-2 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    [class.border-red-500]="isFieldInvalid('email')"
+                    [class.border-gray-300]="!isFieldInvalid('email')"
+                    placeholder="your.email@example.com"
+                  />
+                  <ion-icon
+                    name="mail-outline"
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                </div>
+                <p
+                  *ngIf="isFieldInvalid('email')"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ getFieldError('email') }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Address Information Section -->
+          <div class="border-b border-gray-200 pb-6">
+            <h2
+              class="text-lg font-semibold text-gray-900 mb-4 flex items-center"
+            >
+              <ion-icon
+                name="location-outline"
+                class="mr-2 text-blue-600"
+              ></ion-icon>
+              Address Information
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- State -->
+              <div>
+                <label
+                  for="state"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  State *
+                </label>
+                <div class="relative">
+                  <select
+                    id="state"
+                    formControlName="state"
+                    class="w-full px-3 py-2 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
+                    [class.border-red-500]="isFieldInvalid('state')"
+                    [class.border-gray-300]="!isFieldInvalid('state')"
+                  >
+                    <option value="">Select state</option>
+                    <option
+                      *ngFor="let option of stateOptions"
+                      [value]="option.value"
+                    >
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <ion-icon
+                    name="business-outline"
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                  <ion-icon
+                    name="chevron-down-outline"
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                </div>
+                <p
+                  *ngIf="isFieldInvalid('state')"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ getFieldError('state') }}
+                </p>
+              </div>
+
+              <!-- Province -->
+              <div>
+                <label
+                  for="province"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Province *
+                </label>
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="province"
+                    formControlName="province"
+                    class="w-full px-3 py-2 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    [class.border-red-500]="isFieldInvalid('province')"
+                    [class.border-gray-300]="!isFieldInvalid('province')"
+                    placeholder="Enter province"
+                  />
+                  <ion-icon
+                    name="map-outline"
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                </div>
+                <p
+                  *ngIf="isFieldInvalid('province')"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ getFieldError('province') }}
+                </p>
+              </div>
+
+              <!-- City -->
+              <div>
+                <label
+                  for="city"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  City *
+                </label>
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="city"
+                    formControlName="city"
+                    class="w-full px-3 py-2 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    [class.border-red-500]="isFieldInvalid('city')"
+                    [class.border-gray-300]="!isFieldInvalid('city')"
+                    placeholder="Enter city"
+                  />
+                  <ion-icon
+                    name="location-outline"
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                </div>
+                <p
+                  *ngIf="isFieldInvalid('city')"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ getFieldError('city') }}
+                </p>
+              </div>
+
+              <!-- Postal Code -->
+              <div>
+                <label
+                  for="postalCode"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Postal Code *
+                </label>
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="postalCode"
+                    formControlName="postalCode"
+                    class="w-full px-3 py-2 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    [class.border-red-500]="isFieldInvalid('postalCode')"
+                    [class.border-gray-300]="!isFieldInvalid('postalCode')"
+                    placeholder="12345"
+                  />
+                  <ion-icon
+                    name="mail-unread-outline"
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                </div>
+                <p
+                  *ngIf="isFieldInvalid('postalCode')"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ getFieldError('postalCode') }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Full Address -->
+            <div class="mt-4">
+              <label
+                for="address"
+                class="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Full Address *
+              </label>
+              <div class="relative">
+                <textarea
+                  id="address"
+                  formControlName="address"
+                  rows="3"
+                  class="w-full px-3 py-2 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  [class.border-red-500]="isFieldInvalid('address')"
+                  [class.border-gray-300]="!isFieldInvalid('address')"
+                  placeholder="Enter your complete address"
+                ></textarea>
+                <ion-icon
+                  name="home-outline"
+                  class="absolute left-3 top-3 text-gray-400"
+                ></ion-icon>
+              </div>
+              <p
+                *ngIf="isFieldInvalid('address')"
+                class="mt-1 text-sm text-red-600"
+              >
+                {{ getFieldError('address') }}
+              </p>
+            </div>
+          </div>
+
+          <!-- Identification Section -->
+          <div class="border-b border-gray-200 pb-6">
+            <h2
+              class="text-lg font-semibold text-gray-900 mb-4 flex items-center"
+            >
+              <ion-icon
+                name="card-outline"
+                class="mr-2 text-blue-600"
+              ></ion-icon>
+              Identification
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- ID Type -->
+              <div>
+                <label
+                  for="idType"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  ID Type *
+                </label>
+                <div class="relative">
+                  <select
+                    id="idType"
+                    formControlName="idType"
+                    class="w-full px-3 py-2 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white"
+                    [class.border-red-500]="isFieldInvalid('idType')"
+                    [class.border-gray-300]="!isFieldInvalid('idType')"
+                  >
+                    <option value="">Select ID type</option>
+                    <option
+                      *ngFor="let option of idTypeOptions"
+                      [value]="option.value"
+                    >
+                      {{ option.label }}
+                    </option>
+                  </select>
+                  <ion-icon
+                    name="card-outline"
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                  <ion-icon
+                    name="chevron-down-outline"
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                </div>
+                <p
+                  *ngIf="isFieldInvalid('idType')"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ getFieldError('idType') }}
+                </p>
+              </div>
+
+              <!-- ID Number -->
+              <div>
+                <label
+                  for="idNumber"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  ID Number *
+                </label>
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="idNumber"
+                    formControlName="idNumber"
+                    class="w-full px-3 py-2 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    [class.border-red-500]="isFieldInvalid('idNumber')"
+                    [class.border-gray-300]="!isFieldInvalid('idNumber')"
+                    placeholder="Enter ID number"
+                  />
+                  <ion-icon
+                    name="finger-print-outline"
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                </div>
+                <p
+                  *ngIf="isFieldInvalid('idNumber')"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ getFieldError('idNumber') }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Emergency Contact Section -->
+          <div class="pb-6">
+            <h2
+              class="text-lg font-semibold text-gray-900 mb-4 flex items-center"
+            >
+              <ion-icon
+                name="medical-outline"
+                class="mr-2 text-blue-600"
+              ></ion-icon>
+              Emergency Contact
+            </h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Emergency Contact Name -->
+              <div>
+                <label
+                  for="emergencyContact"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Emergency Contact Name *
+                </label>
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="emergencyContact"
+                    formControlName="emergencyContact"
+                    class="w-full px-3 py-2 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    [class.border-red-500]="isFieldInvalid('emergencyContact')"
+                    [class.border-gray-300]="!isFieldInvalid('emergencyContact')"
+                    placeholder="Enter emergency contact name"
+                  />
+                  <ion-icon
+                    name="people-outline"
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                </div>
+                <p
+                  *ngIf="isFieldInvalid('emergencyContact')"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ getFieldError('emergencyContact') }}
+                </p>
+              </div>
+
+              <!-- Emergency Phone -->
+              <div>
+                <label
+                  for="emergencyPhone"
+                  class="block text-sm font-medium text-gray-700 mb-1"
+                >
+                  Emergency Phone *
+                </label>
+                <div class="relative">
+                  <input
+                    type="tel"
+                    id="emergencyPhone"
+                    formControlName="emergencyPhone"
+                    class="w-full px-3 py-2 pl-10 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    [class.border-red-500]="isFieldInvalid('emergencyPhone')"
+                    [class.border-gray-300]="!isFieldInvalid('emergencyPhone')"
+                    placeholder="+65 9123 4567"
+                  />
+                  <ion-icon
+                    name="call-outline"
+                    class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+                  ></ion-icon>
+                </div>
+                <p
+                  *ngIf="isFieldInvalid('emergencyPhone')"
+                  class="mt-1 text-sm text-red-600"
+                >
+                  {{ getFieldError('emergencyPhone') }}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Actions -->
+          <div
+            class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200"
+          >
+            <button
+              type="submit"
+              [disabled]="isSubmitting"
+              class="flex-1 bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center font-medium"
+            >
+              <ion-icon
+                *ngIf="!isSubmitting"
+                name="checkmark-circle-outline"
+                class="mr-2"
+              ></ion-icon>
+              <ion-icon
+                *ngIf="isSubmitting"
+                name="sync-outline"
+                class="mr-2 animate-spin"
+              ></ion-icon>
+              {{ isSubmitting ? 'Submitting...' : 'Register SIM' }}
+            </button>
+
+            <button
+              type="button"
+              (click)="onReset()"
+              [disabled]="isSubmitting"
+              class="flex-1 sm:flex-initial bg-gray-200 text-gray-800 py-3 px-6 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 flex items-center justify-center font-medium"
+            >
+              <ion-icon name="refresh-outline" class="mr-2"></ion-icon>
+              Reset Form
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Footer -->
+      <div class="text-center mt-8 text-sm text-gray-500">
+        <p>By registering, you agree to our terms and conditions</p>
+      </div>
+    </div>
+  </div>
+</ion-content>

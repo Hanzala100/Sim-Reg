@@ -1,0 +1,25 @@
+<div
+  class="fixed inset-0 flex items-center justify-center bg-emerald-900/30 backdrop-blur-sm z-50"
+>
+  <div class="relative">
+    <!-- Golden ring spinner -->
+    <div
+      class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full border-4 sm:border-[5px] md:border-[6px] border-transparent border-t-gold border-r-gold/60 border-b-transparent border-l-transparent animate-spin"
+    ></div>
+
+    <!-- Inner ring for depth -->
+    <div
+      class="absolute inset-2 sm:inset-3 md:inset-4 rounded-full border-2 sm:border-3 md:border-3 border-transparent border-t-peach-yellow/80 animate-spin"
+      style="animation-duration: 1.5s; animation-direction: reverse"
+    ></div>
+  </div>
+
+  <!-- Loading text -->
+  <div class="absolute mt-20 sm:mt-24 md:mt-28 text-center">
+    <div
+      class="text-xs sm:text-sm md:text-base font-medium text-gold/90 font-vietnam tracking-wider"
+    >
+      LOADING
+    </div>
+  </div>
+</div>
