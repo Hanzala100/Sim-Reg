@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonContent, IonIcon } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SimRegistrationData } from 'src/app/interfaces/simRegisteration.model';
+import { SimRegistrationData } from 'src/app/interfaces/SimRegisteration.model';
 
 @Component({
   selector: 'app-home',
